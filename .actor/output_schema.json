@@ -1,0 +1,11 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "Output schema of the Bulk Email Verifier",
+    "properties": {
+        "results": {
+            "type": "string",
+            "title": "Verified emails",
+            "template": "{{links.apiDefaultDatasetUrl}}/items"
+        }
+    }
+}

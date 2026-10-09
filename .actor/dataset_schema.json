@@ -1,0 +1,115 @@
+{
+    "actorSpecification": 1,
+    "title": "Verified emails",
+    "description": "One record per submitted email address.",
+    "fields": {
+        "type": "object",
+        "properties": {
+            "email": {
+                "type": "string",
+                "title": "Email",
+                "description": "Address that was checked."
+            },
+            "status": {
+                "type": "string",
+                "title": "Status",
+                "description": "valid, invalid, risky, disposable, or unknown."
+            },
+            "reason": {
+                "type": "string",
+                "title": "Reason",
+                "description": "Why this status was chosen."
+            },
+            "isDisposable": {
+                "type": "boolean",
+                "title": "Disposable",
+                "description": "The domain is on the disposable-email list."
+            },
+            "isRoleAccount": {
+                "type": "boolean",
+                "title": "Role account",
+                "description": "Shared mailbox such as info@, admin@, or support@."
+            },
+            "isCatchAll": {
+                "type": "boolean",
+                "title": "Catch-all",
+                "description": "The domain accepted a random address as well."
+            },
+            "possibleBlanketReject": {
+                "type": "boolean",
+                "title": "Possible blanket reject",
+                "description": "The server rejected this address and a fake one with the same 5xx reply."
+            },
+            "mxRecordFound": {
+                "type": "boolean",
+                "title": "MX record found",
+                "description": "The domain published a usable MX record."
+            },
+            "checkedAt": {
+                "type": "string",
+                "title": "Checked at",
+                "description": "When this address was checked."
+            }
+        }
+    },
+    "views": {
+        "overview": {
+            "title": "Verified emails",
+            "description": "One row per submitted email address.",
+            "transformation": {
+                "fields": [
+                    "email",
+                    "status",
+                    "reason",
+                    "isDisposable",
+                    "isRoleAccount",
+                    "isCatchAll",
+                    "possibleBlanketReject",
+                    "mxRecordFound",
+                    "checkedAt"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "email": {
+                        "label": "Email",
+                        "format": "text"
+                    },
+                    "status": {
+                        "label": "Status",
+                        "format": "text"
+                    },
+                    "reason": {
+                        "label": "Reason",
+                        "format": "text"
+                    },
+                    "isDisposable": {
+                        "label": "Disposable",
+                        "format": "boolean"
+                    },
+                    "isRoleAccount": {
+                        "label": "Role account",
+                        "format": "boolean"
+                    },
+                    "isCatchAll": {
+                        "label": "Catch-all",
+                        "format": "boolean"
+                    },
+                    "possibleBlanketReject": {
+                        "label": "Blanket reject",
+                        "format": "boolean"
+                    },
+                    "mxRecordFound": {
+                        "label": "MX record found",
+                        "format": "boolean"
+                    },
+                    "checkedAt": {
+                        "label": "Checked at",
+                        "format": "date"
+                    }
+                }
+            }
+        }
+    }
+}

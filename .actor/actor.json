@@ -1,0 +1,14 @@
+{
+    "actorSpecification": 1,
+    "name": "bulk-email-verifier",
+    "title": "Bulk Email Verifier",
+    "description": "Verify email addresses at the protocol level: syntax, domain, disposable detection, and an SMTP mailbox check that never sends mail. You pay only for determined results. Timeouts and blanket rejections come back as unknown and are not charged.",
+    "version": "0.1",
+    "buildTag": "latest",
+    "input": "./input_schema.json",
+    "output": "./output_schema.json",
+    "dockerfile": "../Dockerfile",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    }
+}

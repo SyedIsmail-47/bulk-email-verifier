@@ -1,0 +1,62 @@
+{
+    "title": "Bulk Email Verifier",
+    "description": "Check a list of email addresses. Each address is saved once, with a status of valid, invalid, risky, disposable, or unknown. Unknown results are not charged.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "emails": {
+            "title": "Email addresses",
+            "type": "array",
+            "description": "Addresses to verify, one per line. To load them from storage instead, add a line such as dataset:DATASET_ID#email or kv:STORE_ID/RECORD_KEY#email. The part after # is the field name and defaults to email. The sample lines use the reserved .invalid domain so a run finishes without contacting a real mail server.",
+            "editor": "stringList",
+            "default": [
+                "not-an-email",
+                "person@mailbox-check.invalid",
+                "info@mailbox-check.invalid"
+            ],
+            "prefill": [
+                "not-an-email",
+                "person@mailbox-check.invalid",
+                "info@mailbox-check.invalid"
+            ],
+            "minItems": 1,
+            "items": {
+                "type": "string"
+            }
+        },
+        "smtpTimeoutMs": {
+            "title": "SMTP timeout",
+            "type": "integer",
+            "description": "How long to wait for each SMTP connection, in milliseconds. The same limit applies to the domain lookup. The random-address probe uses the time left on that same connection.",
+            "default": 10000,
+            "prefill": 10000,
+            "minimum": 1000,
+            "maximum": 120000,
+            "unit": "milliseconds"
+        },
+        "maxConcurrentPerDomain": {
+            "title": "Max checks per mail domain",
+            "type": "integer",
+            "description": "How many checks may run at the same time against one mail domain. Other domains still run in parallel. The maximum is 3, so a large batch cannot open a pile of connections to one server.",
+            "default": 2,
+            "prefill": 2,
+            "minimum": 1,
+            "maximum": 3
+        },
+        "checkCatchAll": {
+            "title": "Detect catch-all domains",
+            "type": "boolean",
+            "description": "After a mail server accepts an address, check one random address at the same domain on that same connection. If the server accepts that too, the result is risky instead of valid.",
+            "default": true,
+            "prefill": true
+        },
+        "checkRoleAccounts": {
+            "title": "Flag role accounts",
+            "type": "boolean",
+            "description": "Mark shared mailboxes such as info@, admin@, and support@ with isRoleAccount. This is a flag on the result, not a separate status.",
+            "default": true,
+            "prefill": true
+        }
+    },
+    "required": ["emails"]
+}
